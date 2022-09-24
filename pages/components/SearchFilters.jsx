@@ -1,14 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  Flex,
-  Select,
-  Box,
-  Text,
-  Input,
-  Spinner,
-  Icon,
-  Button,
-} from '@chakra-ui/react';
+import { Flex, Select, Box, Text, Input, Spinner, Icon, Button } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { MdCancel } from 'react-icons/md';
 import Image from 'next/image';
@@ -26,25 +17,18 @@ const SearchFilters = () => {
     const values = getFilterValues(filterValues);
 
     values.forEach((item) => {
-      query[item.name] = item.value;
+      if (item.value && filterValues?.[item.name]) query[item.name] = item.value;
     });
 
     router.push({ pathname: path, query });
   };
 
   return (
-    <Flex
-      flexWrap="wrap"
-      justifyContent="center"
-      p="4"
-      borderColor="gray.100"
-    >
+    <Flex flexWrap="wrap" justifyContent="center" p="4" borderColor="gray.100">
       {filters.map((filter) => (
         <Box key={filter.queryName}>
           <Select
-            onChange={(e) =>
-              searchProperties({ [filter.queryName]: e.target.value })
-            }
+            onChange={(e) => searchProperties({ [filter.queryName]: e.target.value })}
             placeholder={filter.placeholder}
             w="fit-content"
             p="2"
